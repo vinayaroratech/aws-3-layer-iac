@@ -41,9 +41,7 @@ module "web_server_sg" {
   vpc_id      = module.vpc.vpc_id
   ingress_with_cidr_blocks = [
     {
-      from_port   = 22
-      to_port     = 22
-      protocol    = "tcp"
+      rule        = "ssh-tcp"
       description = "SSH"
       cidr_blocks = "0.0.0.0/0"
     }
@@ -67,9 +65,13 @@ module "app_alb_sg" {
     {
       rule                     = "http-80-tcp"
       source_security_group_id = module.web_server_sg.security_group_id
+    },
+    {
+      rule                     = "ssh-tcp"
+      source_security_group_id = module.web_server_sg.security_group_id
     }
   ]
-  number_of_computed_ingress_with_source_security_group_id = 1
+  number_of_computed_ingress_with_source_security_group_id = 2
 }
 
 module "app_server_sg" {
@@ -99,7 +101,7 @@ module "db_sg" {
   vpc_id      = module.vpc.vpc_id
   computed_ingress_with_source_security_group_id = [
     {
-      rule                     = "mysql-tcp"
+      rule                     = "postgresql-tcp"
       source_security_group_id = module.app_server_sg.security_group_id
     }
   ]
