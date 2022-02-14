@@ -21,3 +21,7 @@ variable "public_subnets_cidr" {
 variable "database_subnets_cidr" {
   type = list(any)
 }
+
+variable "common_tags" {
+  type = any
+}

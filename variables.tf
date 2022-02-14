@@ -4,7 +4,7 @@ variable "project" {
   type        = string
 }
 
-variable "ssh_keypair" {
+variable "instance_keypair" {
   description = "SSH keypair to use for EC2 instance"
   default     = "symba-terraform-keypair"
   type        = string
