@@ -3,17 +3,53 @@ data "aws_availability_zones" "available" {}
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
-  version          = "2.64.0"
-  name             = "${var.project}-vpc"
-  cidr             = "10.0.0.0/16"
-  azs              = data.aws_availability_zones.available.names
-  private_subnets  = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
-  public_subnets   = ["10.0.10.0/24", "10.0.11.0/24", "10.0.12.0/24"]
-  database_subnets = ["10.0.21.0/24", "10.0.22.0/24", "10.0.23.0/24"]
+  version         = "2.78.0"
+  name            = "${var.project}-vpc"
+  cidr            = var.vpc_cidr
+  azs             = data.aws_availability_zones.available.names
+  private_subnets = var.private_subnets_cidr
+  public_subnets  = var.public_subnets_cidr
 
-  create_database_subnet_group = true
-  enable_nat_gateway           = false
-  single_nat_gateway           = false
+  # Database Subnets
+  create_database_subnet_group       = true
+  create_database_subnet_route_table = true
+  database_subnets                   = var.database_subnets_cidr
+
+  #create_database_nat_gateway_route = true
+  #create_database_internet_gateway_route = true
+
+  # NAT Gateways - Outbound Communication
+  enable_nat_gateway = true
+  single_nat_gateway = true
+
+  # VPC DNS Parameters
+  enable_dns_hostnames = true
+  enable_dns_support   = true
+
+  tags = {
+    Project     = var.project
+    Environment = "${terraform.workspace}"
+  }
+  vpc_tags = {
+    Name        = var.project
+    Environment = "${terraform.workspace}"
+  }
+  public_subnet_tags = {
+    Name        = var.project
+    Environment = "${terraform.workspace}"
+    Type        = "public-subnets"
+  }
+  private_subnet_tags = {
+    Name        = var.project
+    Environment = "${terraform.workspace}"
+    Type        = "private-subnets"
+  }
+
+  database_subnet_tags = {
+    Name        = var.project
+    Environment = "${terraform.workspace}"
+    Type        = "database-subnets"
+  }
 }
 
 module "web_alb_sg" {
