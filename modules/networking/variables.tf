@@ -2,6 +2,10 @@ variable "project" {
   type = string
 }
 
+variable "azs" {
+  type = list(any)
+}
+
 variable "vpc_cidr" {
   type = string
 }
