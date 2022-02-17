@@ -12,3 +12,9 @@ output "sg" {
     app_server_sg_name   = module.private_sg.this_security_group_name
   }
 }
+
+output "loadbalancer_sg" {
+  value = {
+    alb_sg_id = module.loadbalancer_sg.this_security_group_id
+  }
+}

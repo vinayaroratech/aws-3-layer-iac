@@ -17,3 +17,9 @@ output "ec2_private_ip" {
   description = "List of private ip address assigned to the instances"
   value       = module.app.ec2_private_ip
 }
+
+# Terraform AWS Application Load Balancer (ALB) Outputs
+output "alb" {
+  description = "Application Load Balancer"
+  value       = module.alb.alb
+}

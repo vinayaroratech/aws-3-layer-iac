@@ -12,7 +12,7 @@ variable "instance_keypair" {
 
 variable "aws_region" {
   description = "AWS region"
-  default     = "ap-south-1"
+  default     = "us-east-2"
   type        = string
 }
 
@@ -28,7 +28,7 @@ variable "vpc_cidr" {
 
 variable "private_subnets_cidr" {
   type    = list(any)
-  default = ["10.0.1.0/24", "10.0.2.0/24"]
+  default = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
 }
 
 variable "public_subnets_cidr" {
@@ -43,5 +43,5 @@ variable "database_subnets_cidr" {
 
 variable "azs" {
   type    = list(any)
-  default = ["ap-south-1a", "ap-south-1b"]
+  default = ["us-east-2a", "us-east-2b", "us-east-2c"]
 }

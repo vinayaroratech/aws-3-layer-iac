@@ -33,5 +33,5 @@ variable "instance_type" {
 variable "ami" {
   description = "EC2 AMI"
   type        = string
-  default     = "ami-0e6b0a17afac0450f"
+  default     = "ami-0bd586d26693ecbe9"
 }

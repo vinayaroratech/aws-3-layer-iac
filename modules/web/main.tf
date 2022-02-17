@@ -38,7 +38,7 @@ resource "null_resource" "name" {
     user        = "ubuntu"
     password    = ""
     private_key = self.triggers.private_key
-    agent    = "false"
+    agent       = "false"
   }
 
   # Copies the ${var.instance_keypair}.pem file to /tmp/${var.instance_keypair}.pem

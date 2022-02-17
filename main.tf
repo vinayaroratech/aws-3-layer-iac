@@ -31,3 +31,12 @@ module "web" {
   sg          = module.networking.sg
   common_tags = local.common_tags
 }
+
+module "alb" {
+  source                   = "./modules/alb"
+  vpc                      = module.networking.vpc
+  loadbalancer_sg          = module.networking.loadbalancer_sg
+  ec2_private_instance_ids = module.app.ec2_private_instance_ids
+  name                     = local.name
+  common_tags              = local.common_tags
+}
