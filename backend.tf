@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
-    bucket = "sybma-terra-state-bucket"
+    bucket = "symba-tf-state-bucket"
     key    = "tfstate"
-    region = "ap-south-1"
+    region = "us-east-2"
   }
 }

@@ -8,6 +8,12 @@ output "ec2_bastion_public_ip" {
   value       = module.web.ec2_bastion_public_ip
 }
 
+output "elastic_ip" {
+  description = "Elastic IP for Bastion Host"
+  value       = module.web.elastic_ip
+}
+
+
 # Private EC2 Instances
 output "ec2_private_instance_ids" {
   description = "List of IDs of instances"
@@ -19,7 +25,12 @@ output "ec2_private_ip" {
 }
 
 # Terraform AWS Application Load Balancer (ALB) Outputs
-output "alb" {
-  description = "Application Load Balancer"
-  value       = module.alb.alb
+output "web-alb" {
+  description = "Web Application Load Balancer"
+  value       = module.web-alb.alb
+}
+
+output "api-alb" {
+  description = "API Application Load Balancer"
+  value       = module.api-alb.alb
 }

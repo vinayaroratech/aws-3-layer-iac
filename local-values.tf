@@ -7,5 +7,7 @@ locals {
   common_tags = {
     owners      = local.owners
     environment = local.environment
+    createdby   = "terraform"
+    author      = "vinay"
   }
 } 

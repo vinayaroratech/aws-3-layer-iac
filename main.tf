@@ -32,11 +32,20 @@ module "web" {
   common_tags = local.common_tags
 }
 
-module "alb" {
+module "web-alb" {
   source                   = "./modules/alb"
   vpc                      = module.networking.vpc
   loadbalancer_sg          = module.networking.loadbalancer_sg
-  ec2_private_instance_ids = module.app.ec2_private_instance_ids
-  name                     = local.name
+  ec2_private_instance_ids = [module.app.ec2_private_instance_ids[0], module.app.ec2_private_instance_ids[1]]
+  name                     = "${local.name}-web"
+  common_tags              = local.common_tags
+}
+
+module "api-alb" {
+  source                   = "./modules/alb"
+  vpc                      = module.networking.vpc
+  loadbalancer_sg          = module.networking.loadbalancer_sg
+  ec2_private_instance_ids = [module.app.ec2_private_instance_ids[2], module.app.ec2_private_instance_ids[3]]
+  name                     = "${local.name}-api"
   common_tags              = local.common_tags
 }

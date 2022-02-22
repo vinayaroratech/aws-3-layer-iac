@@ -7,3 +7,9 @@ output "ec2_bastion_public_ip" {
   description = "List of Public ip address assigned to the instances"
   value       = module.ec2_public.public_ip
 }
+
+output "elastic_ip" {
+  description = "Elastic IP for Bastion Host"
+  value       = aws_eip.bastion_eip.public_ip
+}
+
