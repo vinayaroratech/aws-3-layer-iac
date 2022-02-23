@@ -6,7 +6,7 @@ module "ec2_private" {
   name                   = "${var.project}-${terraform.workspace}-vm"
   ami                    = var.ami
   instance_type          = var.instance_type
-  user_data              = file("${path.module}/apache-install.sh")
+  user_data              = file("${path.module}/tool-install.sh")
   key_name               = var.instance_keypair
   vpc_security_group_ids = [var.sg.app_server_sg]
   instance_count         = 4
